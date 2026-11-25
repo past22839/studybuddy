@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <title>Study Notes</title>
   <script src="/sail/baremux/index.js"></script>
-  <script src="/scramjet.all.js"></script>
+  <script src="/sail/scramjet.controller.js"></script>
+  <script src="/sail/scramjet.config.js"></script>
   <style>
     body { margin: 0; font-family: sans-serif; background: #111; color: #fff; }
     #top { display: flex; padding: 8px; gap: 6px; background: #1e1e1e; }
@@ -27,17 +28,7 @@
     const frame = document.getElementById("frame");
     const bar = document.getElementById("bar");
 
-    const { ScramjetController } = $scramjetLoadController();
-    const scramjet = new ScramjetController({
-      files: {
-        wasm: "/scramjet.wasm.wasm",
-        all: "/scramjet.all.js",
-        sync: "/scramjet.sync.js",
-      },
-      prefix: "/sail/go/",
-    });
-
-    scramjet.init();
+    navigator.serviceWorker.register("/sail/sw.js", { scope: "/sail/" });
 
     async function nav() {
       let url = bar.value.trim();
@@ -50,7 +41,7 @@
       }
 
       await connection.setTransport("/sail/libcurl/index.mjs", [{ wisp: wispurl }]);
-      frame.src = scramjet.encodeUrl(url);
+      frame.src = __scramjet$config.prefix + __scramjet$config.codec.encode(url);
     }
 
     bar.addEventListener("keydown", (e) => {
