@@ -51,22 +51,19 @@
 
         function nav() {
             let url = bar.value.trim()
-            if (!url) return;
+            async function nav() {
+  let url = bar.value.trim();
+  if (!url) return;
 
-            if (!url.includes(".")) {
-                // Feel free to change the search engine to any of the following:
-                // https://google.com/search?q=
-                // https://duckduckgo.com/search?q=
-                // https://bing.com/search?q=
-                // https://qwant.com/search?q=
-                // You can also choose one of your own
-                url = "https://search.brave.com/search?q=" + encodeURIComponent(url)
-            } else if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                url = "https://" + url
-            }
+  if (!url.includes(".")) {
+    url = "https://google.com" + encodeURIComponent(url);
+  } else if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    url = "https://" + url;
+  }
 
-            frame.src = scramjet.encodeUrl(url)
-        }
+  await connection.setTransport("/sail/libcurl/index.mjs", [{ wisp: wispurl }]);
+  frame.src = scramjet.encodeUrl(url);
+}
 
         bar.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
