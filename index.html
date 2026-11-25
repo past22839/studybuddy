@@ -4,8 +4,7 @@
   <meta charset="utf-8" />
   <title>Study Notes</title>
   <script src="/sail/baremux/index.js"></script>
-<script src="/sail/scramjet/scramjet.all.js"></script>
-
+  <script src="/scramjet.all.js"></script>
   <style>
     body { margin: 0; font-family: sans-serif; background: #111; color: #fff; }
     #top { display: flex; padding: 8px; gap: 6px; background: #1e1e1e; }
@@ -31,12 +30,9 @@
     const { ScramjetController } = $scramjetLoadController();
     const scramjet = new ScramjetController({
       files: {
-       files: {
-  wasm: "/sail/scramjet/scramjet.wasm.wasm",
-  all: "/sail/scramjet/scramjet.all.js",
-  sync: "/sail/scramjet/scramjet.sync.js",
-},
-
+        wasm: "/scramjet.wasm.wasm",
+        all: "/scramjet.all.js",
+        sync: "/scramjet.sync.js",
       },
       prefix: "/sail/go/",
     });
